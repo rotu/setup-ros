@@ -178,7 +178,7 @@ jobs:
     steps:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
-        continue-on-error: github.repository != 'ros-tooling/setup-ros'
+        continue-on-error: ${{ github.repository != 'ros-tooling/setup-ros' }}
         id: aws_credentials
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
