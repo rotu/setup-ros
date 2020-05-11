@@ -174,10 +174,12 @@ jobs:
       - test_environment_linux
       - test_multiple_ros_installations
       - test_ros_binary_install_ubuntu
-    if: ${{ !cancelled() }} # Run even if the dependent jobs have failed, to log failures
-    # When a contribution is made on a fork, the secrets will not be available,
-    # so failure is expected. But on the main repo, fail loudly.
-    continue-on-error: ${{ github.repository != 'ros-tooling/setup-ros' }}
+    # serves two purposes:
+    # - `needs` suppresses run if dependent jobs have failed. we want to run anyway to log failures.
+    # - When a contribution is made on a fork, the secrets will not be available,
+    #   so failure is expected. But on the main repo, fail loudly.
+    if: ${{ github.repository == 'ros-tooling/setup-ros'  }} # Run even if the dependent jobs have failed, to log failures
+
     steps:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
