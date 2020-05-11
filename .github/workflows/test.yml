@@ -178,13 +178,8 @@ jobs:
     # - `needs` suppresses run if dependent jobs have failed. we want to run anyway to log failures.
     # - When a contribution is made on a fork, the secrets will not be available,
     #   so failure is expected. But on the main repo, fail loudly.
-    if: ${{ github.repository == 'ros-tooling/setup-ros' }} # Run even if the dependent jobs have failed, to log failures
-
+    if: ${{ ! github.event.repository.fork && ! github.event.pull_request.base.repo.fork }}
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
