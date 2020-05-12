@@ -15,7 +15,7 @@ defaults:
 
 env:
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  FOO: BAR
+  FOO: BAR2
 
 jobs:
   test_environment:
